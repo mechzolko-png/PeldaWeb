@@ -1,3 +1,4 @@
 # my-python-project
-p
+print ("szia zoli")
+
 #mond ha változott
