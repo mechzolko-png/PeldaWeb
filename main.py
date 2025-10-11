@@ -1,5 +1,4 @@
-import random
+import random as r
 
-a = random.randint(0,10)
-
+a = r
 print (a)
