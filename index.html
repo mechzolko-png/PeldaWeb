@@ -1,47 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      header {
-        display: flex;
-        justify-content: center;
-        padding-top: 20px;
-        color: black;
-        font-size: xx-large;
-        margin-bottom: 0;
-        background-image: url(nightsky.jpg);
-        background-position: center;
-        background-size: cover;
-        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-          sans-serif;
-        height: 150px;
-        box-shadow: 0 0.5px 20px rgb(0, 0, 0);
-      }
-      main {
-        background-color: #a5deec ;
-        color: rgb(0, 0, 0);
-        margin-left: 60px;
-        margin-right: 60px;
-        border-radius: 50px;
-        margin-top: 50px;
-        box-shadow: 0 0.5px 20px rgb(0, 0, 0);
-      }
-      body {
-        background-image: url(SZAMURAI\ VAROS.jpg);
-        background-position: center;
-        background-size: cover;
-        color: rgb(0, 0, 0);
-        margin: 0;
-      }
-      nav {
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PéldaWeb</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Gill Sans", Calibri, sans-serif;
+      background-image: url("SZAMURAI VAROS.jpg");
+      color: #000;
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      background-image: url(nightsky.jpg);
+      background-size: cover;
+      color: black;
+      font-size: xx-large;
+      box-shadow: 0 0.5px 20px rgb(0, 0, 0);
+    }
+
+    /* --- Desktop menü --- */
+    nav.desktop-menu {
         display: flex;
         justify-content: center;
         align-items: center;
         position: fixed;
-        top: 10px; /* <<< ez rögzíti az tetejére */
+        top: 10px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 200;
@@ -51,229 +40,342 @@
         box-shadow: 0 1px 10px rgb(0, 0, 0);
         backdrop-filter: blur(1.4px);
         -webkit-backdrop-filter: blur(1px);
-      }
-      .q {
-        background-color: rgba(0, 0, 0, 0.1);
-        margin: 10px;
-        font-size: large;
-        border-radius: 10px;
-        padding: 5px 10px;
-        color: rgb(255, 255, 255);
-        box-shadow: 0 3px 0px rgba(255, 252, 252, 0.9);
-        box-shadow: 0 1px 10px rgb(0, 0, 0,0.7);
-      }
-      .cont {
-        display: flex;
-        justify-content: center;
-        z-index: -200;
-      }
-      nav:hover {
-        transition: all 0.5s;
+    }
+
+    nav.desktop-menu:hover {
+      transition: all 0.5s;
         background-color: rgba(108, 108, 108, 0.3);
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.9);
         transform: translateX(-50%) scale(1.03);
-        
+    }
+
+    nav.desktop-menu .q {
+      background-color: rgba(0,0,0,0.1);
+      margin: 10px;
+      font-size: large;
+      border-radius: 10px;
+      padding: 5px 10px;
+      color: #fff;
+      box-shadow: 0 1px 10px rgba(0,0,0,0.7);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    nav.desktop-menu .q:hover {
+      background-color: rgba(10,10,10,0.6);
+      transform: scale(1.1);
+      box-shadow: 0 10px 0 rgba(255,255,255,0.9);
+    }
+
+    /* --- Hamburger gomb --- */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 35px;
+      height: 30px;
+      z-index: 300;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 100%;
+      height: 4px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* --- Mobil teljesképernyős menü --- */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      transition: transform 0.5s ease;
+      z-index: 250;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.9);
+    }
+
+    .mobile-menu.show {
+      transform: translateY(0);
+    }
+
+    .mobile-menu .q {
+      font-size: 2rem;
+      margin: 20px 0;
+      padding: 10px 30px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      color: #000000;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .mobile-menu .q:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+
+    /* --- Reszponzív szabály --- */
+    @media (max-width: 768px) {
+      nav.desktop-menu {
+        display: none;
       }
-      .q:hover {
-        transition: all 0.5s;
-        background-color: rgba(10, 10, 10, 0.6);
-        box-shadow: 0 10px 0px rgba(255, 255, 255, 0.9);
-        transform: scale(1.1);
+      .hamburger {
+        display: flex;
       }
-      main {
-        padding: 40px;
-      }
-    </style>
-  </head>
-  <body>
-    <header><h1>PéldaWeb</h1></header>
-    <div class="cont">
-      <nav>
-        <div class="q">Képek</div>
-        <div class="q">Iratok</div>
-        <div class="q">Főoldal</div>
-        <div class="q">Youtube</div>
-        <div class="q">Facebook</div>
-        <div class="q">6</div>
-        <div class="q">7</div>
-        <div class="q">8</div>
-        <div class="q">9</div>
-      </nav>
+    }
+
+    /* --- Main stílus a választó blokkokhoz (ahogy korábban) --- */
+    main {
+      background-color: #a5deec;
+      color: rgb(0, 0, 0);
+      margin: 60px;
+      border-radius: 50px;
+      padding: 40px;
+      box-shadow: 0 0.5px 20px rgb(0,0,0);
+    }
+
+    .container1 {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .crs {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+
+    .crs:hover { transform: scale(1.05); }
+
+    .a2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .a1 {
+      flex: 1;
+      margin-right: 15px;
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #000;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover { transform: scale(1.1); }
+    button.clicked { background-color: limegreen; }
+  </style>
+</head>
+<body>
+
+<header><h1>PéldaWeb</h1></header>
+
+<!-- Desktop menü -->
+<nav class="desktop-menu">
+  <div class="q">Képek</div>
+  <div class="q">Iratok</div>
+  <div class="q">Főoldal</div>
+  <div class="q">Youtube</div>
+  <div class="q">Facebook</div>
+</nav>
+
+<!-- Hamburger gomb mobilra -->
+<div class="hamburger" id="hamburger">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<!-- Teljes képernyős mobil menü -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="q">Képek</div>
+  <div class="q">Iratok</div>
+  <div class="q">Főoldal</div>
+  <div class="q">Youtube</div>
+  <div class="q">Facebook</div>
+</div>
+
+<main>
+  <h2>PéldaSzöveg az üveg teszthez</h2>
+
+  <div class="container1">
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
     </div>
-    <main>
-      <h2>
-        PéldaSzöveg az üveg teszthez (csak a menüt kell nézni lent mert ez még
-        nem kész csak random beraktam valami hátteret de ez nem ilyen lesz
-        véglegesen)
-      </h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, velit
-        corporis. Cumque ut hic distinctio reprehenderit illo porro laudantium
-        mollitia fuga labore inventore iste modi aliquid dolorem dicta fugit
-        facere, unde neque nulla excepturi impedit perferendis voluptates
-        eveniet facilis quasi. Quo amet consequuntur molestiae! Fugiat, ut alias
-        facilis consequatur voluptatem, aperiam mollitia dolor expedita
-        laudantium vel quod tenetur voluptatum laborum odit at, praesentium esse
-        autem laboriosam culpa. Amet at eaque exercitationem accusantium autem,
-        itaque molestias sit laborum harum voluptates totam, pariatur, non
-        expedita eligendi blanditiis. Velit perspiciatis facere aliquid ea
-        blanditiis fuga architecto itaque adipisci nam repellat, eligendi
-        placeat labore incidunt dolore ipsa, tempore commodi! Quis, nemo.
-        Placeat, voluptatibus dignissimos et iste aspernatur maiores odit
-        voluptate id molestiae harum? Dolorem perspiciatis, in harum qui error
-        atque praesentium, quam porro delectus corporis quasi impedit blanditiis
-        nam, ipsa aliquam officiis accusantium adipisci? Minima expedita unde
-        consequuntur, reiciendis eius fuga voluptas nulla placeat distinctio
-        adipisci delectus tempora doloribus magnam! Alias unde officia ipsum
-        repudiandae, minus aut eum quia accusamus necessitatibus sapiente iure!
-        Odio veritatis ut inventore illum esse quidem voluptas perferendis nemo
-        aperiam distinctio, incidunt consequatur eos! Corporis eius suscipit
-        nemo fuga et nihil maxime! Laboriosam omnis, nam eligendi veritatis
-        officiis aut repellat, laborum minima repellendus culpa labore eum iure
-        sint reprehenderit eveniet ipsam ea esse nisi! Omnis ad iure laborum
-        officiis ducimus repudiandae voluptate ullam, magni suscipit dolor
-        adipisci, nesciunt odio assumenda necessitatibus molestias reprehenderit
-        dicta aspernatur sapiente quidem nisi rerum libero. Delectus earum natus
-        similique eos quidem veritatis ipsum laboriosam expedita ex ducimus iure
-        sed, optio quasi id velit hic vero reiciendis totam blanditiis
-        distinctio minus necessitatibus omnis? Fugit numquam cumque harum id ea
-        repudiandae voluptatem minus tenetur quas, in dolorem, tempore deleniti
-        deserunt a totam magnam perspiciatis provident rerum. Quia mollitia modi
-        animi voluptatem nostrum temporibus expedita rem necessitatibus
-        asperiores sint illo veritatis, consectetur totam ab similique in hic
-        autem soluta. Velit quis commodi sunt laboriosam inventore facere
-        mollitia qui temporibus tenetur. Architecto laudantium magnam
-        necessitatibus officia ratione dolorem, itaque saepe aliquid minus nisi
-        maiores, quasi eius quis molestias eveniet, optio id illo. Consequatur
-        nihil quod at. Perferendis vero deleniti natus quas sapiente placeat
-        exercitationem id neque beatae enim, accusamus totam asperiores, earum,
-        officiis vel fugit quisquam. Voluptate inventore qui excepturi suscipit
-        nesciunt, error, voluptatum consequatur amet, nulla aut unde
-        consequuntur. Amet asperiores accusamus nostrum facilis rerum debitis
-        dolorem perferendis. Libero iste, dicta, alias repudiandae modi et, est
-        blanditiis eos distinctio veniam facere! Commodi eum laudantium animi
-        maiores veritatis atque eius sit libero sed vero nobis ad sint odio
-        magnam dicta placeat corrupti quisquam, non deleniti praesentium id?
-        Molestias aliquid ratione eveniet hic, voluptate consequuntur nobis
-        doloribus? Beatae voluptatem dicta commodi quidem provident minima,
-        exercitationem rem officiis quisquam sapiente architecto debitis aut
-        suscipit molestiae animi voluptas, laboriosam esse deleniti veniam quasi
-        doloribus odio enim? Ut reprehenderit, dignissimos odit sequi ratione
-        assumenda delectus, velit, recusandae laboriosam consectetur cum omnis
-        sit? Similique accusamus, pariatur veniam esse velit reiciendis
-        assumenda, exercitationem provident voluptatem totam aut in et
-        voluptates nobis repudiandae labore quibusdam odit Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Dolorum, velit corporis. Cumque ut
-        hic distinctio reprehenderit illo porro laudantium mollitia fuga labore
-        inventore iste modi aliquid dolorem dicta fugit facere, unde neque nulla
-        excepturi impedit perferendis voluptates eveniet facilis quasi. Quo amet
-        consequuntur molestiae! Fugiat, ut alias facilis consequatur voluptatem,
-        aperiam mollitia dolor expedita laudantium vel quod tenetur voluptatum
-        laborum odit at, praesentium esse autem laboriosam culpa. Amet at eaque
-        exercitationem accusantium autem, itaque molestias sit laborum harum
-        voluptates totam, pariatur, non expedita eligendi blanditiis. Velit
-        perspiciatis facere aliquid ea blanditiis fuga architecto itaque
-        adipisci nam repellat, eligendi placeat labore incidunt dolore ipsa,
-        tempore commodi! Quis, nemo. Placeat, voluptatibus dignissimos et iste
-        aspernatur maiores odit voluptate id molestiae harum? Dolorem
-        perspiciatis, in harum qui error atque praesentium, quam porro delectus
-        corporis quasi impedit blanditiis nam, ipsa aliquam officiis accusantium
-        adipisci? Minima expedita unde consequuntur, reiciendis eius fuga
-        voluptas nulla placeat distinctio adipisci delectus tempora doloribus
-        magnam! Alias unde officia ipsum repudiandae, minus aut eum quia
-        accusamus necessitatibus sapiente iure! Odio veritatis ut inventore
-        illum esse quidem voluptas perferendis nemo aperiam distinctio, incidunt
-        consequatur eos! Corporis eius suscipit nemo fuga et nihil maxime!
-        Laboriosam omnis, nam eligendi veritatis officiis aut repellat, laborum
-        minima repellendus culpa labore eum iure sint reprehenderit eveniet
-        ipsam ea esse nisi! Omnis ad iure laborum officiis ducimus repudiandae
-        voluptate ullam, magni suscipit dolor adipisci, nesciunt odio assumenda
-        necessitatibus molestias reprehenderit dicta aspernatur sapiente quidem
-        nisi rerum libero. Delectus earum natus similique eos quidem veritatis
-        ipsum laboriosam expedita ex ducimus iure sed, optio quasi id velit hic
-        vero reiciendis totam blanditiis distinctio minus necessitatibus omnis?
-        Fugit numquam cumque harum id ea repudiandae voluptatem minus tenetur
-        quas, in dolorem, tempore deleniti deserunt a totam magnam perspiciatis
-        provident rerum. Quia mollitia modi animi voluptatem nostrum temporibus
-        expedita rem necessitatibus asperiores sint illo veritatis, consectetur
-        totam ab similique in hic autem soluta. Velit quis commodi sunt
-        laboriosam inventore facere mollitia qui temporibus tenetur. Architecto
-        laudantium magnam necessitatibus officia ratione dolorem, itaque saepe
-        aliquid minus nisi maiores, quasi eius quis molestias eveniet, optio id
-        illo. Consequatur nihil quod at. Perferendis vero deleniti natus quas
-        sapiente placeat exercitationem id neque beatae enim, accusamus totam
-        asperiores, earum, officiis vel fugit quisquam. Voluptate inventore qui
-        excepturi suscipit nesciunt, error, voluptatum consequatur amet, nulla
-        aut unde consequuntur. Amet asperiores accusamus nostrum facilis rerum
-        debitis dolorem perferendis. Libero iste, dicta, alias repudiandae modi
-        et, est blanditiis eos distinctio veniam facere! Commodi eum laudantium
-        animi maiores veritatis atque eius sit libero sed vero nobis ad sint
-        odio magnam dicta placeat corrupti quisquam, non deleniti praesentium
-        id? Molestias aliquid ratione eveniet hic, voluptate consequuntur nobis
-        doloribus? Beatae voluptatem dicta commodi quidem provident minima,
-        exercitationem rem officiis quisquam sapiente architecto debitis aut
-        suscipit molestiae animi voluptas, laboriosam esse deleniti veniam quasi
-        doloribus odio enim? Ut reprehenderit, dignissimos odit sequi ratione
-        assumenda delectus, velit, recusandae laboriosam consectetur cum omnis
-        sit? Similique accusamus, pariatur veniam esse velit reiciendis
-        assumenda, exercitationem provident voluptatem totam aut in et
-        voluptates nobis repudiandae labore quibusdam odit Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Dolorum, velit corporis. Cumque ut
-        hic distinctio reprehenderit illo porro laudantium mollitia fuga labore
-        inventore iste modi aliquid dolorem dicta fugit facere, unde neque nulla
-        excepturi impedit perferendis voluptates eveniet facilis quasi. Quo amet
-        consequuntur molestiae! Fugiat, ut alias facilis consequatur voluptatem,
-        aperiam mollitia dolor expedita laudantium vel quod tenetur voluptatum
-        laborum odit at, praesentium esse autem laboriosam culpa. Amet at eaque
-        exercitationem accusantium autem, itaque molestias sit laborum harum
-        voluptates totam, pariatur, non expedita eligendi blanditiis. Velit
-        perspiciatis facere aliquid ea blanditiis fuga architecto itaque
-        adipisci nam repellat, eligendi placeat labore incidunt dolore ipsa,
-        tempore commodi! Quis, nemo. Placeat, voluptatibus dignissimos et iste
-        aspernatur maiores odit voluptate id molestiae harum? Dolorem
-        perspiciatis, in harum qui error atque praesentium, quam porro delectus
-        corporis quasi impedit blanditiis nam, ipsa aliquam officiis accusantium
-        adipisci? Minima expedita unde consequuntur, reiciendis eius fuga
-        voluptas nulla placeat distinctio adipisci delectus tempora doloribus
-        magnam! Alias unde officia ipsum repudiandae, minus aut eum quia
-        accusamus necessitatibus sapiente iure! Odio veritatis ut inventore
-        illum esse quidem voluptas perferendis nemo aperiam distinctio, incidunt
-        consequatur eos! Corporis eius suscipit nemo fuga et nihil maxime!
-        Laboriosam omnis, nam eligendi veritatis officiis aut repellat, laborum
-        minima repellendus culpa labore eum iure sint reprehenderit eveniet
-        ipsam ea esse nisi! Omnis ad iure laborum officiis ducimus repudiandae
-        voluptate ullam, magni suscipit dolor adipisci, nesciunt odio assumenda
-        necessitatibus molestias reprehenderit dicta aspernatur sapiente quidem
-        nisi rerum libero. Delectus earum natus similique eos quidem veritatis
-        ipsum laboriosam expedita ex ducimus iure sed, optio quasi id velit hic
-        vero reiciendis totam blanditiis distinctio minus necessitatibus omnis?
-        Fugit numquam cumque harum id ea repudiandae voluptatem minus tenetur
-        quas, in dolorem, tempore deleniti deserunt a totam magnam perspiciatis
-        provident rerum. Quia mollitia modi animi voluptatem nostrum temporibus
-        expedita rem necessitatibus asperiores sint illo veritatis, consectetur
-        totam ab similique in hic autem soluta. Velit quis commodi sunt
-        laboriosam inventore facere mollitia qui temporibus tenetur. Architecto
-        laudantium magnam necessitatibus officia ratione dolorem, itaque saepe
-        aliquid minus nisi maiores, quasi eius quis molestias eveniet, optio id
-        illo. Consequatur nihil quod at. Perferendis vero deleniti natus quas
-        sapiente placeat exercitationem id neque beatae enim, accusamus totam
-        asperiores, earum, officiis vel fugit quisquam. Voluptate inventore qui
-        excepturi suscipit nesciunt, error, voluptatum consequatur amet, nulla
-        aut unde consequuntur. Amet asperiores accusamus nostrum facilis rerum
-        debitis dolorem perferendis. Libero iste, dicta, alias repudiandae modi
-        et, est blanditiis eos distinctio veniam facere! Commodi eum laudantium
-        animi maiores veritatis atque eius sit libero sed vero nobis ad sint
-        odio magnam dicta placeat corrupti quisquam, non deleniti praesentium
-        id? Molestias aliquid ratione eveniet hic, voluptate consequuntur nobis
-        doloribus? Beatae voluptatem dicta commodi quidem provident minima,
-        exercitationem rem officiis quisquam sapiente architecto debitis aut
-        suscipit molestiae animi voluptas, laboriosam esse deleniti veniam quasi
-        doloribus odio enim? Ut reprehenderit, dignissimos odit sequi ratione
-        assumenda delectus, velit, recusandae laboriosam consectetur cum omnis
-        sit? Similique accusamus, pariatur veniam esse velit reiciendis
-        assumenda, exercitationem provident voluptatem totam aut in et
-        voluptates nobis repudiandae labore quibusdam odit!
-      </p>
-    </main>
-  </body>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+</main>
+
+<main>
+  <h2>PéldaSzöveg az üveg teszthez</h2>
+
+  <div class="container1">
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+</main>
+
+<main>
+  <h2>PéldaSzöveg az üveg teszthez</h2>
+
+  <div class="container1">
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+</main>
+
+<main>
+  <h2>PéldaSzöveg az üveg teszthez</h2>
+
+  <div class="container1">
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+</main>
+
+<main>
+  <h2>PéldaSzöveg az üveg teszthez</h2>
+
+  <div class="container1">
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+    <div class="crs">
+      <h3>Választó blokk</h3>
+      <div class="a2">
+        <p class="a1">Lorem ipsum dolor sit amet consectetur.</p>
+        <button></button>
+      </div>
+    </div>
+</main>
+
+<script>
+  // --- Választó blokk gombok ---
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("clicked");
+    });
+  });
+
+  // --- Hamburger menü ---
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  hamburger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("show");
+  });
+</script>
+
+</body>
 </html>
